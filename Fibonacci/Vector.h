@@ -1,44 +1,17 @@
 #pragma once
-
 #include "Matrix.h"
 struct Vector {
     unsigned long long a[2];
 
-    Vector(unsigned long long x_ = 0, unsigned long long y_ = 0) {
-        a[0] = x_;
-        a[1] = y_;
-    }
-    Vector(Matrix& b) {
-        a[0] = b.a[0][0];
-        a[1] = b.a[1][0];
-    }
-    static Vector i() {
-        return Vector(1, 0);
-    }
+    Vector(unsigned long long x_ = 0, unsigned long long y_ = 0);
+
+    Vector(Matrix& b);
+
+    static Vector i();
 };
 
-std::ostream& operator<<(std::ostream& os, const Vector& a) {
-    for (int i = 0; i < 2; ++i) {
-        os << a.a[i] << " ";
-    }
-    return os;
-}
+std::ostream& operator<<(std::ostream& os, const Vector& a);
 
-Vector operator*(const Matrix& a, const Vector& b) {
-    Vector c;
-    for (int i = 0; i < 2; ++i) {
-        for (int j = 0; j < 1; ++j) {
-            for (int h = 0; h < 2; ++h) {
-                c.a[i] += a.a[i][h] * b.a[h];
-            }
-        }
-    }
-    return c;
-}
+Vector operator*(const Matrix& a, const Vector& b);
 
-std::istream& operator>>(std::istream& is, Vector& a) {
-    for (int i = 0; i < 2; ++i) {
-        is >> a.a[i];
-    }
-    return is;
-}
+std::istream& operator>>(std::istream& is, Vector& a);
